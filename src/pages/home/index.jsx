@@ -30,11 +30,12 @@ export default function HomePage() {
             <h3>{student.nome}</h3>
             <p>Curso: {student.curso}</p>
             <p>Bimestre: {student.bimestre}</p>
+            <button onClick={() => navigate(`/forms/${student._id}`)}>
+              Editar
+            </button>
           </li>
         ))}
       </ul>
-      <button onClick={() => navigate("/forms")}>Editar</button>
-      <Link to="/forms">Editar</Link>
     </div>
   );
 }
