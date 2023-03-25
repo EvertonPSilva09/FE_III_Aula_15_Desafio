@@ -21,6 +21,18 @@ export default function HomePage() {
     }
   }
 
+  async function deleteStudent(id) {
+    event.preventDefault();
+    if (confirm("Deseja realmente excluir o aluno?")) {
+      try {
+        await axios.delete(`https://api-aluno.vercel.app/aluno/${id}`);
+        fetchStudents();
+      } catch (error) {
+        alert("Não foi possível excluir o aluno");
+      }
+    }
+  }
+
   return (
     <div>
       <h1>Alunos do Evertinho</h1>
@@ -33,6 +45,7 @@ export default function HomePage() {
             <Link to={`/student/${student._id}`}>
               <button>Editar</button>
             </Link>
+            <button onClick={() => deleteStudent(student._id)}>Excluir</button>
           </li>
         ))}
       </ul>
