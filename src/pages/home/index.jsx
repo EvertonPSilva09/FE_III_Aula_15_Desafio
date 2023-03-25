@@ -23,16 +23,16 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1>Alunos Evertinho</h1>
+      <h1>Alunos do Evertinho</h1>
       <ul>
         {students.map((student) => (
           <li key={student._id}>
             <h3>{student.nome}</h3>
             <p>Curso: {student.curso}</p>
             <p>Bimestre: {student.bimestre}</p>
-            <button onClick={() => navigate(`/forms/${student._id}`)}>
-              Editar
-            </button>
+            <Link to={`/student/${student._id}`}>
+              <button>Editar</button>
+            </Link>
           </li>
         ))}
       </ul>
