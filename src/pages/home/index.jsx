@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const URL_STUDENTS = "https://api-aluno.vercel.app/aluno";
 
 export default function HomePage() {
   const [students, setStudents] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchStudents();
@@ -27,6 +26,7 @@ export default function HomePage() {
       try {
         await axios.delete(`https://api-aluno.vercel.app/aluno/${id}`);
         fetchStudents();
+        alert("Aluno excluído com sucesso.")
       } catch (error) {
         alert("Não foi possível excluir o aluno");
       }
