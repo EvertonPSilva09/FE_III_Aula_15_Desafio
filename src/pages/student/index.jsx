@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const URL_STUDENTS = "https://api-aluno.vercel.app/aluno/";
 
 export default function StudentPage() {
   const [student, setStudent] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [studentName, setStudentName] = useState("");
+  const [studentRegistration, setStudentRegistration] = useState("");
+  const [studentCourse, setStudentCourse] = useState("");
+  const [studentPeriod, setStudentPeriod] = useState("");
 
   useEffect(() => {
     validateAndFetchStudent(id);
@@ -30,6 +35,29 @@ export default function StudentPage() {
     }
   }
 
+  function clearForm() {
+    setStudentName("");
+    setStudentRegistration("");
+    setStudentCourse("");
+    setStudentPeriod("");
+  }
+
+  async function createStudent(event) {
+    event.preventDefault();
+    try {
+      await axios.post(URL_STUDENTS, {
+        nome: studentName,
+        matricula: studentRegistration,
+        curso: studentCourse,
+        bimestre: studentPeriod,
+      });
+      clearForm();
+      alert("Aluno cadastrado com sucesso")
+    } catch (error) {
+      alert("Não foi possível cadastrar o aluno");
+    }
+  }
+
   return (
     <div>
       {student ? (
@@ -39,7 +67,36 @@ export default function StudentPage() {
           <p>Bimestre: {student.bimestre}</p>
         </>
       ) : (
-        <p>Inserir o formulário</p>
+        <div>
+        <form onSubmit={createStudent}>
+          <input
+            type="text"
+            placeholder="Nome"
+            value={studentName}
+            onChange={(event) => setStudentName(event.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Matricula"
+            value={studentRegistration}
+            onChange={(event) => setStudentRegistration(event.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Curso"
+            value={studentCourse}
+            onChange={(event) => setStudentCourse(event.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Bimestre"
+            value={studentPeriod}
+            onChange={(event) => setStudentPeriod(event.target.value)}
+          />
+          <input type="submit" value={"Cadastrar"} />
+          <button onClick={() => navigate('/')}>Voltar</button>
+        </form>
+        </div>
       )}
     </div>
   );
