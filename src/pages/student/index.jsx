@@ -94,7 +94,7 @@ export default function StudentPage() {
             value={studentPeriod}
             onChange={(event) => setStudentPeriod(event.target.value)}
           />
-          <input type="submit" value={"Cadastrar"} />
+          <input type="submit" value={"Cadastrar"} className="input" />
           <button onClick={() => navigate('/')}>Voltar</button>
         </form>
         </div>
