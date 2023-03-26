@@ -44,6 +44,15 @@ export default function StudentPage() {
 
   async function updateStudent() {
     event.preventDefault();
+    if (
+      !studentName ||
+      !studentRegistration ||
+      !studentCourse ||
+      !studentPeriod
+    ) {
+      alert("Por favor, preencha todos os campos.");
+      return;
+    }
     try {
       await axios.put(`${URL_STUDENTS}${id}`, {
         nome: studentName,
@@ -61,6 +70,15 @@ export default function StudentPage() {
 
   async function createStudent(event) {
     event.preventDefault();
+    if (
+      !studentName ||
+      !studentRegistration ||
+      !studentCourse ||
+      !studentPeriod
+    ) {
+      alert("Por favor, preencha todos os campos.");
+      return;
+    }
     try {
       await axios.post(URL_STUDENTS, {
         nome: studentName,
@@ -79,7 +97,8 @@ export default function StudentPage() {
     <div>
       {student ? (
         <>
-          <h1>{student.nome}</h1>
+          <h1>Editar aluno</h1>
+          <h2>{student.nome}</h2>
           <p>Matricula: {student.matricula}</p>
           <p>Curso: {student.curso}</p>
           <p>Bimestre: {student.bimestre}</p>
@@ -111,12 +130,12 @@ export default function StudentPage() {
                 onChange={(event) => setStudentPeriod(event.target.value)}
               />
               <input type="submit" value={"Editar"} className="input" />
-              <button onClick={() => navigate("/")}>Voltar</button>
             </form>
           </div>
         </>
       ) : (
         <>
+          <h1>Cadastrar novo aluno</h1>
           <form onSubmit={createStudent}>
             <input
               type="text"
