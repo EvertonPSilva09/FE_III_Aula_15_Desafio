@@ -65,6 +65,7 @@ export default function StudentPage() {
           <h1>{student.nome}</h1>
           <p>Curso: {student.curso}</p>
           <p>Bimestre: {student.bimestre}</p>
+          <button onClick={() => navigate('/')}>Voltar</button>
         </>
       ) : (
         <div>
