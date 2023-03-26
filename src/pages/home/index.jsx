@@ -6,10 +6,21 @@ const URL_STUDENTS = "https://api-aluno.vercel.app/aluno";
 
 export default function HomePage() {
   const [students, setStudents] = useState([]);
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     fetchStudents();
   }, []);
+
+  function toggleTheme() {
+    if (theme === "light") {
+      setTheme("dark");
+      document.body.setAttribute("data-theme", "dark");
+    } else {
+      setTheme("light");
+      document.body.setAttribute("data-theme", "light");
+    }
+  }
 
   async function fetchStudents() {
     try {
@@ -36,6 +47,14 @@ export default function HomePage() {
   return (
     <div>
       <h1>Alunos do Evertinho</h1>
+      <div className="button-container">
+        <button
+          onClick={toggleTheme}
+          className={`theme-button ${theme === "light" ? "light" : "dark"}`}
+        >
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
+      </div>
       <Link to={"/student/"}>
         <button>Cadastrar novo</button>
       </Link>
@@ -51,6 +70,7 @@ export default function HomePage() {
             <button onClick={() => deleteStudent(student._id)}>Excluir</button>
           </li>
         ))}
+
       </ul>
     </div>
   );
