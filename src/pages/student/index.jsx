@@ -9,8 +9,17 @@ export default function StudentPage() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetchStudent();
+    validateAndFetchStudent(id);
   }, []);
+
+  async function validateAndFetchStudent(id) {
+    if (!id) {
+      const response = await axios.get(URL_STUDENTS);
+      return response;
+    } else {
+      return fetchStudent(id);
+    }
+  }
 
   async function fetchStudent() {
     try {
@@ -30,7 +39,7 @@ export default function StudentPage() {
           <p>Bimestre: {student.bimestre}</p>
         </>
       ) : (
-        <p>Carregando...</p>
+        <p>Inserir o formulário</p>
       )}
     </div>
   );
