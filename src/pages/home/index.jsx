@@ -36,6 +36,9 @@ export default function HomePage() {
   return (
     <div>
       <h1>Alunos do Evertinho</h1>
+      <Link to={"/student/"}>
+        <button>Cadastrar novo</button>
+      </Link>
       <ul>
         {students.map((student) => (
           <li key={student._id}>
