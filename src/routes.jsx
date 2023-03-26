@@ -1,5 +1,4 @@
 import { createBrowserRouter, Form, RouterProvider } from "react-router-dom";
-import "./routes.css";
 import StudentPage from "./pages/student";
 import HomePage from "./pages/home";
 
