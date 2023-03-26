@@ -45,7 +45,7 @@ export default function StudentPage() {
   async function updateStudent() {
     event.preventDefault();
     try {
-      await axios.put(`https://api-aluno.vercel.app/aluno/${id}`, {
+      await axios.put(`${URL_STUDENTS}${id}`, {
         nome: studentName,
         matricula: studentRegistration,
         curso: studentCourse,
@@ -53,6 +53,7 @@ export default function StudentPage() {
       });
       clearForm();
       fetchStudent();
+      alert("Aluno editado com sucesso");
     } catch (error) {
       alert("Não foi possível editar o aluno.");
     }
