@@ -32,7 +32,6 @@ export default function HomePage() {
   }
 
   async function deleteStudent(id) {
-    event.preventDefault();
     if (confirm("Deseja realmente excluir o aluno?")) {
       try {
         await axios.delete(`https://api-aluno.vercel.app/aluno/${id}`);
